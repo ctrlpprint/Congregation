@@ -7,7 +7,6 @@
 	@Styles.Render("~/Content/bootstrap")
 	@Styles.Render("~/Content/css")
 
-	@Scripts.Render("~/bundles/bootstrap")
 	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="preview" data-spy="scroll" data-target=".subnav" data-offset="80">
@@ -16,6 +15,7 @@
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryui")
     @Scripts.Render("~/bundles/jqueryval")
+	@Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
 </body>
 </html>
