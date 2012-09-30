@@ -1,4 +1,7 @@
 ﻿body {
+		padding-top:60px;
+	position: relative;
+
     font-size: .85em;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     color: #232323;
