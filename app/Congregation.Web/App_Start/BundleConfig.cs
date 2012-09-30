@@ -47,6 +47,10 @@ namespace Congregation.Web
 						"~/Content/bootstrap.site.css"
 				));
 
+			bundles.Add(new StyleBundle("~/Content/bootstrap/united").Include(
+						"~/Content/bootstrap/united/bootstrap.css"
+				));
+	
 		}
 	}
 }

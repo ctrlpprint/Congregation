@@ -144,6 +144,20 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.site.css" />
+    <Content Include="Content\bootstrap\united\bootstrap.css" />
+    <Content Include="Content\bootstrap\united\bootstrap.min.css" />
+    <Content Include="Content\bootstrap\united\bootswatch.css">
+      <DependentUpon>bootswatch.less</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap\united\bootswatch.min.css">
+      <DependentUpon>bootswatch.less</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap\united\variables.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
+    <Content Include="Content\bootstrap\united\variables.min.css">
+      <DependentUpon>variables.less</DependentUpon>
+    </Content>
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -244,6 +258,10 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Home\BootstrapDemo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\bootstrap\united\bootswatch.less" />
+    <None Include="Content\bootstrap\united\variables.less" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
