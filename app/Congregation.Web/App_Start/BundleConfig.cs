@@ -42,15 +42,11 @@ namespace Congregation.Web
 						"~/Content/themes/base/jquery.ui.theme.css"));
 
 			bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-						"~/Content/bootstrap.css",
+						"~/Content/bootstrap/united/bootstrap.css",
 						"~/Content/bootstrap-responsive.css",
 						"~/Content/bootstrap.site.css"
 				));
 
-			bundles.Add(new StyleBundle("~/Content/bootstrap/united").Include(
-						"~/Content/bootstrap/united/bootstrap.css"
-				));
-	
 		}
 	}
 }
