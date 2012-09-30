@@ -94,7 +94,7 @@ body {
 		padding: 5px;
 	}
 
-	.container{
+	.main.container{
 		width:90%;
 		margin:20px auto;
 		background-color: white;
@@ -106,6 +106,26 @@ body {
 	html { 
 		font-size: 100%; 
 	}
+}
+
+
+@media screen and (max-width: 600px) { 
+  .form-horizontal .control-label {
+    float: none;
+    width: auto;
+    padding-top: 0;
+    text-align: left;
+  }
+  .form-horizontal .controls {
+    margin-left: 0;
+  }
+  .form-horizontal .control-list {
+    padding-top: 0;
+  }
+  .form-horizontal .form-actions {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
 }
 
 
