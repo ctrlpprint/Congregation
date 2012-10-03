@@ -22,6 +22,7 @@ namespace Congregation.Application.Data.NHibernate
 			Type baseEntityType = typeof (Entity);
 
 			mapper.IsEntity((type, declared) => IsEntity(type));
+			mapper.IsComponent((type, b) => IsComponent(type));
 			mapper.IsRootEntity((type, declared) => baseEntityType.Equals(type.BaseType));
 
 			mapper.BeforeMapClass += (modelInspector, type, classCustomizer) =>
@@ -43,11 +44,32 @@ namespace Congregation.Application.Data.NHibernate
 				map.Cascade(Cascade.All);
 			};
 
+			mapper.BeforeMapProperty += (inspector, member, customizer) => {
+				// This is pure guesswork, but seems to be the only way I can think of to alter
+				// the column naming of a property mapped as part of a component
+				if(typeof(IComponent).IsAssignableFrom(member.LocalMember.DeclaringType)) {
+					if(member.LocalMember.Name == "Value") {
+						customizer.Column(member.PreviousPath.LocalMember.Name);
+					}
+					else {
+						customizer.Column(member.PreviousPath.LocalMember.Name + member.LocalMember.Name);						
+					}
+				}
+			};
+
+			mapper.BeforeMapComponent += (inspector, member, customizer) => {
+				// Does this actually do anything at all?
+			};
+
 			AddConventionOverrides(mapper);
 
 			HbmMapping mapping = mapper.CompileMappingFor(
 				typeof(Entity).Assembly.GetExportedTypes().Where(IsEntity));
 			configuration.AddDeserializedMapping(mapping, "MyStoreMappings");
+		}
+
+		private static bool IsComponent(Type type) {
+			return typeof (IComponent).IsAssignableFrom(type);
 		}
 
 		/// <summary>

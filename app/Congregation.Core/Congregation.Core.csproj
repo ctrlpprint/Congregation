@@ -47,7 +47,10 @@
     <Compile Include="Models\Families\Address.cs" />
     <Compile Include="Models\Families\Contact.cs" />
     <Compile Include="Models\Families\Family.cs" />
+    <Compile Include="Models\IComponent.cs" />
     <Compile Include="Models\IEntity.cs" />
+    <Compile Include="Models\Privacy\Secured.cs" />
+    <Compile Include="Models\Privacy\Visibility.cs" />
     <Compile Include="Models\ValueObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

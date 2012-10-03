@@ -1,4 +1,6 @@
-﻿namespace Congregation.Core.Models.Families
+﻿using Congregation.Core.Models.Privacy;
+
+namespace Congregation.Core.Models.Families
 {
 	public class Contact : Entity
 	{
@@ -6,8 +8,8 @@
 
 		public virtual string FirstName { get; set; }
 
-		public virtual string Mobile { get; set; }
-		public virtual string Email { get; set; }
+		public virtual Secured<string> Mobile { get; set; }
+		public virtual Secured<string> Email { get; set; }
 		public virtual string FacebookId { get; set; }
 
 		public virtual bool MobileInDirectory { get; set; }
