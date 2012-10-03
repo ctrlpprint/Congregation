@@ -77,6 +77,11 @@ namespace Congregation.Application.Data.NHibernate.ConfigurationCaching
 			File.SetLastWriteTime(cachePath, GetMaxDependencyTime());
 		}
 
+		public void Evict(string configKey) {
+			string cachePath = CachedConfigPath(configKey);
+			File.Delete(cachePath);
+		}
+
 		#endregion
 
 		#region Protected Methods

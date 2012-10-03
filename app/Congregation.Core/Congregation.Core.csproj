@@ -44,6 +44,9 @@
     <Compile Include="Models\DomainSignatureAttribute.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\ComparableObject.cs" />
+    <Compile Include="Models\Families\Address.cs" />
+    <Compile Include="Models\Families\Contact.cs" />
+    <Compile Include="Models\Families\Family.cs" />
     <Compile Include="Models\IEntity.cs" />
     <Compile Include="Models\ValueObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

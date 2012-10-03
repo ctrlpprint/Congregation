@@ -1,4 +1,5 @@
 ﻿using Congregation.Application.Data.NHibernate.ConfigurationCaching;
+using Congregation.Core.Models;
 using NHibernate.Bytecode;
 using NHibernate.Cfg;
 using NHibernate.Dialect;
@@ -8,14 +9,19 @@ namespace Congregation.Application.Data.NHibernate
 {
 	public class NHibernateInitializer
 	{
+		public static void ResetCache() {
+			var cache = new NHibernateConfigurationFileCache();
+			cache.Evict(ConfigCacheKey);
+		}
+
 		public static Configuration Initialize() {
 			var cache = new NHibernateConfigurationFileCache();
 
 			var mappingAssemblies = new[] { 
-                typeof(NHibernateInitializer).Assembly.GetName().Name
+                typeof(Entity).Assembly.GetName().Name
             };
 
-			var configuration = cache.LoadConfiguration(CONFIG_CACHE_KEY, null, mappingAssemblies);
+			var configuration = cache.LoadConfiguration(ConfigCacheKey, null, mappingAssemblies);
 
 			if (configuration == null) {
 				configuration = new Configuration();
@@ -23,22 +29,22 @@ namespace Congregation.Application.Data.NHibernate
 				configuration
 					.Proxy(p => p.ProxyFactoryFactory<DefaultProxyFactoryFactory>())
 					.DataBaseIntegration(db => {
-						db.ConnectionStringName = "MyStoreConnectionString";
+						db.ConnectionStringName = "LocalSqlServer";
 						db.Dialect<MsSql2008Dialect>();
 					})
-					.AddAssembly(typeof(NHibernateInitializer).Assembly)
+					.AddAssembly(typeof(Entity).Assembly)
 					.CurrentSessionContext<LazySessionContext>();
 
 				var mapper = new ConventionModelMapper();
 				mapper.WithConventions(configuration);
 
-				cache.SaveConfiguration(CONFIG_CACHE_KEY, configuration);
+				cache.SaveConfiguration(ConfigCacheKey, configuration);
 			}
 
 			return configuration;
 		}
 
-		private const string CONFIG_CACHE_KEY = "MyStore";
+		private const string ConfigCacheKey = "Congregation";
 	 
 	}
 }

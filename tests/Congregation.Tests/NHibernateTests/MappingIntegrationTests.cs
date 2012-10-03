@@ -20,6 +20,7 @@ namespace Congregation.Tests.NHibernateTests
 	{
 		[SetUp]
 		public virtual void SetUp() {
+			NHibernateInitializer.ResetCache();
 			configuration = NHibernateInitializer.Initialize();
 			sessionFactory = configuration.BuildSessionFactory();
 		}
@@ -29,7 +30,9 @@ namespace Congregation.Tests.NHibernateTests
 			var allClassMetadata = sessionFactory.GetAllClassMetadata();
 
 			foreach (var entry in allClassMetadata) {
-				sessionFactory.OpenSession().CreateCriteria(entry.Value.GetMappedClass(EntityMode.Poco))
+				sessionFactory
+					.OpenSession()
+					.CreateCriteria(entry.Value.GetMappedClass(EntityMode.Poco))
 					.SetMaxResults(0).List();
 			}
 		}

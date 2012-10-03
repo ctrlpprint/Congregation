@@ -27,13 +27,13 @@ namespace Congregation.Application.Data.NHibernate
 			mapper.BeforeMapClass += (modelInspector, type, classCustomizer) =>
 			{
 				classCustomizer.Id(c => c.Column("Id"));
-				classCustomizer.Id(c => c.Generator(Generators.Identity));
+				classCustomizer.Id(c => c.Generator(Generators.HighLow));
 				classCustomizer.Table(Inflector.Net.Inflector.Pluralize(type.Name.ToString()));
 			};
 
 			mapper.BeforeMapManyToOne += (modelInspector, propertyPath, map) =>
 			{
-				map.Column(propertyPath.LocalMember.GetPropertyOrFieldType().Name + "Fk");
+				map.Column(propertyPath.LocalMember.GetPropertyOrFieldType().Name + "Id");
 				map.Cascade(Cascade.Persist);
 			};
 
@@ -46,7 +46,7 @@ namespace Congregation.Application.Data.NHibernate
 			AddConventionOverrides(mapper);
 
 			HbmMapping mapping = mapper.CompileMappingFor(
-				typeof(Conventions).Assembly.GetExportedTypes().Where(IsEntity));
+				typeof(Entity).Assembly.GetExportedTypes().Where(IsEntity));
 			configuration.AddDeserializedMapping(mapping, "MyStoreMappings");
 		}
 
