@@ -1,7 +1,6 @@
-﻿using System.Web;
-using System.Web.Optimization;
+﻿using System.Web.Optimization;
 
-namespace Congregation.Web
+namespace Congregation.Web.Mvc.Config
 {
 	public class BundleConfig
 	{

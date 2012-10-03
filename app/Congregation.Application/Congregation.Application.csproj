@@ -34,6 +34,9 @@
     <Reference Include="Iesi.Collections">
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
+    <Reference Include="Inflector.Net">
+      <HintPath>..\..\lib\Inflector.Net.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -53,8 +56,14 @@
     <Reference Include="SignalR.Hosting.Common">
       <HintPath>..\packages\SignalR.Hosting.Common.0.5.3\lib\net40\SignalR.Hosting.Common.dll</HintPath>
     </Reference>
+    <Reference Include="StructureMap">
+      <HintPath>..\..\lib\StructureMap.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Mvc, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -62,11 +71,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Class1.cs" />
+    <Compile Include="Data\IEntityDuplicateChecker.cs" />
+    <Compile Include="Data\IRepository.cs" />
+    <Compile Include="Data\NHibernate\ConfigurationCaching\FileCache.cs" />
+    <Compile Include="Data\NHibernate\ConfigurationCaching\INHibernateConfigurationCache.cs" />
+    <Compile Include="Data\NHibernate\ConfigurationCaching\NHibernateConfigurationFileCache.cs" />
+    <Compile Include="Data\NHibernate\Conventions.cs" />
+    <Compile Include="Data\NHibernate\DbContext.cs" />
+    <Compile Include="Data\NHibernate\EntityDuplicateChecker.cs" />
+    <Compile Include="Data\NHibernate\LazySessionContext.cs" />
+    <Compile Include="Data\NHibernate\NHibernateInitializer.cs" />
+    <Compile Include="Data\NHibernate\Overrides\IOverride.cs" />
+    <Compile Include="Data\NHibernate\Repository.cs" />
+    <Compile Include="Infrastructure\DependencyResolverInitializer.cs" />
+    <Compile Include="Infrastructure\HasUniqueDomainSignatureAttribute.cs" />
+    <Compile Include="Infrastructure\StructureMapDependencyResolver.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Congregation.Core\Congregation.Core.csproj">
+      <Project>{FE1720B4-294D-4F6A-88AE-BA4128EF488A}</Project>
+      <Name>Congregation.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

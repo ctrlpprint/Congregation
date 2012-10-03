@@ -128,14 +128,20 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Mvc\Config\BundleConfig.cs" />
+    <Compile Include="Mvc\Config\FilterConfig.cs" />
+    <Compile Include="Mvc\Config\RouteConfig.cs" />
+    <Compile Include="Mvc\Config\WebApiConfig.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Mvc\Binders\MoneyBinder.cs" />
+    <Compile Include="Mvc\Binders\SharpModelBinder.cs" />
+    <Compile Include="Mvc\Binders\EntityCollectionValueBinder.cs" />
+    <Compile Include="Mvc\Binders\EntityRetriever.cs" />
+    <Compile Include="Mvc\Binders\EntityValueBinder.cs" />
+    <Compile Include="Mvc\Modules\SessionPerRequestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -247,7 +253,6 @@
     <Content Include="Views\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
@@ -262,6 +267,16 @@
   <ItemGroup>
     <None Include="Content\bootstrap\united\bootswatch.less" />
     <None Include="Content\bootstrap\united\variables.less" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Congregation.Application\Congregation.Application.csproj">
+      <Project>{CACA6C1F-FEBC-4E61-9A99-841B0D68C4D1}</Project>
+      <Name>Congregation.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Congregation.Core\Congregation.Core.csproj">
+      <Project>{FE1720B4-294D-4F6A-88AE-BA4128EF488A}</Project>
+      <Name>Congregation.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

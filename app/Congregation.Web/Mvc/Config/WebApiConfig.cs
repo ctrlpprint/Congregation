@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web.Http;
+﻿using System.Web.Http;
 
-namespace Congregation.Web
+namespace Congregation.Web.Mvc.Config
 {
 	public static class WebApiConfig
 	{
