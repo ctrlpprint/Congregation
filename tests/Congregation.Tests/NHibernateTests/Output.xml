@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<hibernate-mapping xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" assembly="Congregation.Core" xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Congregation.Core.Models.Families.Address" table="Addresses">
+    <id name="Id" column="Id" type="Int32">
+      <generator class="hilo" />
+    </id>
+    <property name="AddressLine1" />
+    <property name="AddressLine2" />
+    <property name="AddressLine3" />
+    <property name="PostCode" />
+    <property name="City" />
+    <property name="Country" />
+    <property name="Description" />
+    <property name="Lat" />
+    <property name="Long" />
+  </class>
+  <class name="Congregation.Core.Models.Families.Contact" table="Contacts">
+    <id name="Id" column="Id" type="Int32">
+      <generator class="hilo" />
+    </id>
+    <many-to-one name="Family" column="FamilyId" cascade="save-update, persist" />
+    <property name="Gender" />
+    <property name="FirstName" />
+    <component class="Congregation.Core.Models.Privacy.Secured`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" name="Mobile">
+      <parent name="Owner" />
+      <property name="Value" column="Mobile" />
+      <property name="Visibility" column="MobileVisibility" />
+    </component>
+    <component class="Congregation.Core.Models.Privacy.Secured`1[[System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]" name="Email">
+      <parent name="Owner" />
+      <property name="Value" column="Email" />
+      <property name="Visibility" column="EmailVisibility" />
+    </component>
+    <property name="FacebookId" />
+    <property name="MobileInDirectory" />
+    <property name="Txt" />
+    <property name="MailingList" />
+  </class>
+  <class name="Congregation.Core.Models.Families.Family" table="Families">
+    <id name="Id" column="Id" type="Int32">
+      <generator class="hilo" />
+    </id>
+    <property name="FamilyName" />
+    <bag name="Contacts" cascade="all">
+      <key column="FamilyFk" />
+      <one-to-many class="Congregation.Core.Models.Families.Contact" />
+    </bag>
+    <property name="Children" />
+    <many-to-one name="Address" column="AddressId" cascade="save-update, persist" />
+    <property name="Phone" />
+    <property name="ShowInDirectory" />
+  </class>
+</hibernate-mapping>

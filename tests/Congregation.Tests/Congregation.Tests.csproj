@@ -65,6 +65,18 @@
       <Project>{CACA6C1F-FEBC-4E61-9A99-841B0D68C4D1}</Project>
       <Name>Congregation.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\app\Congregation.Core\Congregation.Core.csproj">
+      <Project>{FE1720B4-294D-4F6A-88AE-BA4128EF488A}</Project>
+      <Name>Congregation.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\app\Congregation.Web\Congregation.Web.csproj">
+      <Project>{CB663DA5-8736-4AA3-AB1A-AA8DBB025629}</Project>
+      <Name>Congregation.Web</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="NHibernateTests\Output.xml" />
+    <Content Include="NHibernateTests\UnitTestGeneratedSchema.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

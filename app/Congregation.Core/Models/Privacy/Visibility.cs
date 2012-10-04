@@ -2,7 +2,7 @@
 {
 	public enum Visibility
 	{
-		Me,
+		Family,
 		Staff,
 		Congregation
 	}

@@ -2,11 +2,11 @@
 using System.Linq;
 using Congregation.Application.Data.NHibernate.Overrides;
 using Congregation.Core.Models;
+using Congregation.Core.Models.Privacy;
 using NHibernate.Cfg;
 using NHibernate.Cfg.MappingSchema;
-using NHibernate.Mapping.ByCode;
 
-namespace Congregation.Application.Data.NHibernate
+namespace NHibernate.Mapping.ByCode
 {
 	/// <summary>
 	/// Applies global common conventions to the mapped entities. 
@@ -16,10 +16,11 @@ namespace Congregation.Application.Data.NHibernate
 	/// was mapped in the entity's mapping file then the entity's 
 	/// mapping file configuration will take precedence.
 	/// </summary>
-	internal static class Conventions
+	public static class Conventions
 	{
 		public static void WithConventions(this ConventionModelMapper mapper, Configuration configuration) {
-			Type baseEntityType = typeof (Entity);
+			
+			var baseEntityType = typeof (Entity);
 
 			mapper.IsEntity((type, declared) => IsEntity(type));
 			mapper.IsComponent((type, b) => IsComponent(type));
@@ -31,6 +32,11 @@ namespace Congregation.Application.Data.NHibernate
 				classCustomizer.Id(c => c.Generator(Generators.HighLow));
 				classCustomizer.Table(Inflector.Net.Inflector.Pluralize(type.Name.ToString()));
 			};
+
+			mapper.IsPersistentProperty((memberinfo, currentlyPersistent) =>
+			{
+				return memberinfo.Name != "Owner";
+			});
 
 			mapper.BeforeMapManyToOne += (modelInspector, propertyPath, map) =>
 			{
@@ -51,15 +57,33 @@ namespace Congregation.Application.Data.NHibernate
 					if(member.LocalMember.Name == "Value") {
 						customizer.Column(member.PreviousPath.LocalMember.Name);
 					}
-					else {
+					else if(member.LocalMember.Name != "Owner") {
 						customizer.Column(member.PreviousPath.LocalMember.Name + member.LocalMember.Name);						
 					}
 				}
 			};
 
-			mapper.BeforeMapComponent += (inspector, member, customizer) => {
-				// Does this actually do anything at all?
-			};
+
+			mapper.Component<Secured<string>>(x => {
+				x.Property(c => c.Value);
+				x.Property(c => c.Visibility);
+				x.Parent(c => c.Owner);
+			});
+
+			mapper.Component<Secured<bool>>(x => {
+				x.Property(c => c.Value);
+				x.Property(c => c.Visibility);
+				x.Parent(c => c.Owner);
+			});
+
+			// The following probably works, but not if we stop "Owner" from being a persistent property
+			// using mapping.IsPersistentProperty, and if we don't do that we get a Too Many Properties exception.
+			// There's an old thread on nhusers about how there's no documentation in this area...
+			//mapper.BeforeMapComponent += (inspector, member, customizer) => {
+			//    if (member.LocalMember.Name == "Owner") {
+			//        customizer.Parent(member.LocalMember);
+			//    }
+			//};
 
 			AddConventionOverrides(mapper);
 
@@ -68,14 +92,14 @@ namespace Congregation.Application.Data.NHibernate
 			configuration.AddDeserializedMapping(mapping, "MyStoreMappings");
 		}
 
-		private static bool IsComponent(Type type) {
+		private static bool IsComponent(System.Type type) {
 			return typeof (IComponent).IsAssignableFrom(type);
 		}
 
 		/// <summary>
 		/// Determine if type implements IEntityWithTypedId<>
 		/// </summary>
-		public static bool IsEntity(Type type) {
+		public static bool IsEntity(System.Type type) {
 			return typeof (Entity).IsAssignableFrom(type) && typeof (Entity) != type && !type.IsInterface;
 		}
 

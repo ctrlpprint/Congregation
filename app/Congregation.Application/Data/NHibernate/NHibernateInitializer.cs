@@ -11,7 +11,7 @@ namespace Congregation.Application.Data.NHibernate
 	{
 		public static void ResetCache() {
 			var cache = new NHibernateConfigurationFileCache();
-			cache.Evict(ConfigCacheKey);
+			cache.Evict(CONFIG_CACHE_KEY);
 		}
 
 		public static Configuration Initialize() {
@@ -21,30 +21,36 @@ namespace Congregation.Application.Data.NHibernate
                 typeof(Entity).Assembly.GetName().Name
             };
 
-			var configuration = cache.LoadConfiguration(ConfigCacheKey, null, mappingAssemblies);
-
+			var configuration = cache.LoadConfiguration(CONFIG_CACHE_KEY, null, mappingAssemblies);
+			
 			if (configuration == null) {
-				configuration = new Configuration();
 
-				configuration
-					.Proxy(p => p.ProxyFactoryFactory<DefaultProxyFactoryFactory>())
-					.DataBaseIntegration(db => {
-						db.ConnectionStringName = "LocalSqlServer";
-						db.Dialect<MsSql2008Dialect>();
-					})
-					.AddAssembly(typeof(Entity).Assembly)
-					.CurrentSessionContext<LazySessionContext>();
+				configuration = CreateConfiguration();
 
 				var mapper = new ConventionModelMapper();
 				mapper.WithConventions(configuration);
 
-				cache.SaveConfiguration(ConfigCacheKey, configuration);
+				cache.SaveConfiguration(CONFIG_CACHE_KEY, configuration);
 			}
 
 			return configuration;
 		}
 
-		private const string ConfigCacheKey = "Congregation";
+		public static Configuration CreateConfiguration() {
+			var configuration = new Configuration();
+
+			configuration
+				.Proxy(p => p.ProxyFactoryFactory<DefaultProxyFactoryFactory>())
+				.DataBaseIntegration(db => {
+					db.ConnectionStringName = "LocalSqlServer";
+					db.Dialect<MsSql2008Dialect>();
+				})
+				.AddAssembly(typeof(Entity).Assembly)
+				.CurrentSessionContext<LazySessionContext>();
+			return configuration;
+		}
+
+		private const string CONFIG_CACHE_KEY = "Congregation";
 	 
 	}
 }

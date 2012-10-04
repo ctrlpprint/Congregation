@@ -1,7 +1,9 @@
 ﻿using System.IO;
 using Congregation.Application.Data.NHibernate;
+using Congregation.Core.Models;
 using NHibernate;
 using NHibernate.Cfg;
+using NHibernate.Mapping.ByCode;
 using NHibernate.Tool.hbm2ddl;
 using NUnit.Framework;
 
@@ -43,13 +45,30 @@ namespace Congregation.Tests.NHibernateTests
 		[Test]
 		public void CanGenerateDatabaseSchema() {
 			using (ISession session = sessionFactory.OpenSession()) {
-				using (TextWriter stringWriter = new StreamWriter("../../../../app/Congrgation.Application/Data/Sql/UnitTestGeneratedSchema.sql")) {
+				using (TextWriter stringWriter = new StreamWriter("../../NHibernateTests/UnitTestGeneratedSchema.sql")) {
 					new SchemaExport(configuration).Execute(true, false, false, session.Connection, stringWriter);
 				}
 			}
 		}
 
+
+		[Test]
+		public void CanGenerateMappingDoc() {
+			// Need a separate config so we can get hold of the mapper after using it.
+			// If we use the existing config we get a duplicate mapping exception.
+			var config = NHibernateInitializer.CreateConfiguration();
+
+			var mapper = new ConventionModelMapper();
+			mapper.WithConventions(config);
+
+			var mapping = mapper.CompileMappingFor(typeof(Entity).Assembly.GetExportedTypes());
+			var x = mapping.AsString();
+			File.WriteAllText("../../NHibernateTests/Output.xml", x);
+		}
+
+
 		private Configuration configuration;
 		private ISessionFactory sessionFactory;
+
 	}
 }

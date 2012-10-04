@@ -2,6 +2,7 @@
 {
 	public interface IComponent
 	{
+		object Owner { get; set; }
 		 
 	}
 }

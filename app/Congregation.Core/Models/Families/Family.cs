@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Congregation.Core.Models.Privacy;
 
 namespace Congregation.Core.Models.Families
 {
