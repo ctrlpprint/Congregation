@@ -6,85 +6,48 @@
 -------------------------------------------------- */
 body {
   position: relative;
-	background-color: transparent;
-/*  padding-top: 80px; */ /* for fixed nav-bar sites */
+		background-color: transparent;
+  padding-top: 40px; /* for fixed nav-bar sites */
 }
 
 
 /* Responsive Docs
 -------------------------------------------------- */
 @media (min-width: 980px) {
-	/* navbar not a toolbar */
+	/* navbar not a toolbar 
 	.navbar-top .navbar-inner {
 		background-image: none;
-	background-color: transparent;
+		background-color: transparent;
 		border: none;
 		color: navy;
 		text-shadow: none;
 	}
-
 	.navbar-top .container .brand, .navbar-top .container .nav>li>a  {
 		color: navy;
 		border: none;
 		text-shadow: 0 0px 0 #000;
 	}
+*/
 
-	html { 
-		font-size: 93.8%;    
-		background-color: #f1f2f3; 
+	html {
+		/* cribbed from http://lea.verou.me/2011/04/css3-patterns-gallery-and-a-new-pattern/ */
+		height:100%;
+		background-color: #79CE70;
+		background-size: 100% 100%, 100px 100px;
 		background-image: 
-		  -webkit-linear-gradient(0deg, 
-			transparent .1em, 
-			rgba(0,0,0,.05) .1em, 
-			rgba(0,0,0,.05) .16000em, 
-			transparent .125000em),
-		  -webkit-linear-gradient(
-			rgba(0,0,0,.05) .062500em, 
-			transparent .062500em);
-		background-image: 
-		  -moz-linear-gradient(0deg, 
-			transparent .1em, 
-			rgba(0,0,0,.05) .1em, 
-			rgba(0,0,0,.05) .16000em, 
-			transparent .125000em),
-		  -moz-linear-gradient(
-			rgba(0,0,0,.05) .062500em, 
-			transparent .062500em);
-		background-image: 
-		  -ms-linear-gradient(0deg, 
-			transparent .1em, 
-			rgba(0,0,0,.05) .1em, 
-			rgba(0,0,0,.05) .16000em, 
-			transparent .125000em),
-		  -ms-linear-gradient(
-			rgba(0,0,0,.05) .062500em, 
-			transparent .062500em);
-		background-image: 
-		  -o-linear-gradient(0deg, 
-			transparent .1em, 
-			rgba(0,0,0,.05) .1em, 
-			rgba(0,0,0,.05) .16000em, 
-			transparent .125000em),
-		  -o-linear-gradient(
-			rgba(0,0,0,.05) .062500em, 
-			transparent .062500em);
-		background-image: 
-		  linear-gradient(0deg, 
-			transparent .1em, 
-			rgba(0,0,0,.05) .1em, 
-			rgba(0,0,0,.05) .16000em, 
-			transparent .125000em),
-		  linear-gradient(
-			rgba(0,0,0,.05) .062500em, 
-			transparent .062500em);
-		background-size: 1.5em 1.5em;  
-		background-position: 0 -1em; 
+			linear-gradient(90deg, transparent 50%, white 50%),
+			linear-gradient(45deg, 
+				rgba(255, 255, 255, .3) 25%, 
+				transparent 25%,
+				transparent 50%, 
+				rgba(255, 255, 255, .3) 50%, 
+				rgba(255, 255, 255, .3) 75%,
+				transparent 75%, 
+				transparent);
 	}
 
 	.box-shadow {  /* CSS3: http://owltastic.com/1409/12/shadows-and-css3/ */
-		-webkit-box-shadow: 0 1px 6px rgba(0,0,0,.5);
-		-moz-box-shadow: 0 1px 6px rgba(0,0,0,.5);
-		box-shadow: 0 1px 6px rgba(0,0,0,.5); 
+		box-shadow: -8px 0 6px -6px rgba(0,0,0,.5);  /* x-offset y-offset blur spread color */
 	}
 
 	.rounded {
@@ -95,8 +58,8 @@ body {
 	}
 
 	.main.container{
-		width:90%;
-		margin:20px auto;
+		width:960px;
+		margin:0 auto;
 		background-color: white;
 		padding: 20px;
 	}

@@ -1,10 +1,27 @@
-//
-// Variables
-// --------------------------------------------------
+// Play with the variables at http://bootswatchr.com/edit/689af42a#!
 
 
-// Global values
-// --------------------------------------------------
+// stuff you really shouldn't change
+@horizontalComponentOffset: 180px;
+@gridRowWidth: (@gridColumns * @gridColumnWidth) + (@gridGutterWidth * (@gridColumns - 1));
+@gridColumnWidth1200:     70px;
+@gridGutterWidth1200:     30px;
+@gridRowWidth1200:        (@gridColumns * @gridColumnWidth1200) + (@gridGutterWidth1200 * (@gridColumns - 1));
+@gridColumnWidth768:      42px;
+@gridGutterWidth768:      20px;
+@gridRowWidth768:         (@gridColumns * @gridColumnWidth768) + (@gridGutterWidth768 * (@gridColumns - 1));
+@fluidGridColumnWidth:    percentage(@gridColumnWidth/@gridRowWidth);
+@fluidGridGutterWidth:    percentage(@gridGutterWidth/@gridRowWidth);
+@fluidGridColumnWidth1200:     percentage(@gridColumnWidth1200/@gridRowWidth1200);
+@fluidGridGutterWidth1200:     percentage(@gridGutterWidth1200/@gridRowWidth1200);
+@fluidGridColumnWidth768:      percentage(@gridColumnWidth768/@gridRowWidth768);
+@fluidGridGutterWidth768:      percentage(@gridGutterWidth768/@gridRowWidth768);
+@zindexDropdown: 1000;
+@zindexFixedNavbar: 1030;
+@zindexModal: 1050;
+@zindexModalBackdrop: 1040;
+@zindexPopover: 1010;
+@zindexTooltip: 1030;
 
 
 // Grays
@@ -55,7 +72,9 @@
 
 @headingsFontFamily:    inherit; // empty to use BS default, @baseFontFamily
 @headingsFontWeight:    bold;    // instead of browser default, bold
-@headingsColor:         inherit; // empty to use BS default, @textColor
+//@headingsColor:         inherit; // empty to use BS default, @textColor
+@headingsColor: #279E1B;
+
 
 // Tables
 // -------------------------
@@ -159,18 +178,26 @@
 @navbarCollapseWidth:             979px;
 
 @navbarHeight:                    40px;
-@navbarBackgroundHighlight:       #ffffff;
+//@navbarBackgroundHighlight:       #ffffff;
+@navbarBackgroundHighlight: #BD2028;
 @navbarBackground:                darken(@navbarBackgroundHighlight, 5%);
 @navbarBorder:                    darken(@navbarBackground, 12%);
 
-@navbarText:                      #777;
-@navbarLinkColor:                 #777;
-@navbarLinkColorHover:            @grayDark;
-@navbarLinkColorActive:           @gray;
+//@navbarText:                      #777;
+//@navbarLinkColor:                 #777;
+//@navbarLinkColorHover:            @grayDark;
+//@navbarLinkColorActive:           @gray;
+@navbarLinkColor: @grayLighter;
+@navbarLinkColorActive: @grayLight;
+@navbarLinkColorHover: @white;
+@navbarText: @grayLight;
 @navbarLinkBackgroundHover:       transparent;
 @navbarLinkBackgroundActive:      darken(@navbarBackground, 5%);
 
-@navbarBrandColor:                @navbarLinkColor;
+//@navbarBrandColor:                @navbarLinkColor;
+@navbarBrandColor: @grayLighter;
+
+
 
 // Inverted navbar
 @navbarInverseBackground:                #111111;
@@ -201,9 +228,12 @@
 
 // Hero unit
 // -------------------------
-@heroUnitBackground:              @grayLighter;
-@heroUnitHeadingColor:            inherit;
-@heroUnitLeadColor:               inherit;
+//@heroUnitBackground:              @grayLighter;
+//@heroUnitHeadingColor:            inherit;
+//@heroUnitLeadColor:               inherit;
+@heroUnitBackground: #65BBB4;
+@heroUnitHeadingColor: #BD2028;
+@heroUnitLeadColor: #7B0A10;
 
 
 // Form states and alerts

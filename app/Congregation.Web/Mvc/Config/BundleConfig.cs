@@ -25,6 +25,8 @@ namespace Congregation.Web.Mvc.Config
 						"~/Scripts/modernizr-*"));
 
 			bundles.Add(new StyleBundle("~/Content/css").Include("~/Content/site.css"));
+			bundles.Add(new ScriptBundle("~/bundles/prefixfree").Include(
+						"~/Scripts/prefixfree.js"));
 
 			bundles.Add(new StyleBundle("~/Content/themes/base/css").Include(
 						"~/Content/themes/base/jquery.ui.core.css",

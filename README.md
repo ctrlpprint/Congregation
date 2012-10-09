@@ -1,5 +1,5 @@
-[Congregation]
-==============
+Congregation
+============
 
 Congregation is a nascent CRM for churches and similar organisations. It's feature set is ... evolving.
 
