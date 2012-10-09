@@ -41,8 +41,8 @@ namespace Congregation.Web.Mvc.Config
 						"~/Content/themes/base/jquery.ui.theme.css"));
 
 			bundles.Add(new StyleBundle("~/Content/bootstrap").Include(
-						"~/Content/bootstrap/united/bootstrap.css",
-						"~/Content/bootstrap-responsive.css",
+						"~/Content/less/bootstrap.css",
+						"~/Content/less/responsive.css",
 						"~/Content/bootstrap.site.css"
 				));
 

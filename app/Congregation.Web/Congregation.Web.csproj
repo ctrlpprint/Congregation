@@ -146,27 +146,21 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\bootstrap-responsive.css" />
-    <Content Include="Content\bootstrap-responsive.min.css" />
-    <Content Include="Content\bootstrap.css" />
-    <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.site.css" />
-    <Content Include="Content\bootstrap\united\bootstrap.css" />
-    <Content Include="Content\bootstrap\united\bootstrap.min.css" />
-    <Content Include="Content\bootstrap\united\bootswatch.css">
-      <DependentUpon>bootswatch.less</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap\united\bootswatch.min.css">
-      <DependentUpon>bootswatch.less</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap\united\variables.css">
-      <DependentUpon>variables.less</DependentUpon>
-    </Content>
-    <Content Include="Content\bootstrap\united\variables.min.css">
-      <DependentUpon>variables.less</DependentUpon>
-    </Content>
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\less\bootstrap.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\bootstrap.min.css">
+      <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\responsive.css">
+      <DependentUpon>responsive.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\responsive.min.css">
+      <DependentUpon>responsive.less</DependentUpon>
+    </Content>
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
     <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
@@ -239,6 +233,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\less.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config" />
@@ -253,7 +248,162 @@
     <Content Include="Features\Shared\Error.cshtml" />
     <Content Include="Features\Shared\_Layout.cshtml" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Content\less\accordion.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\alerts.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\bootstrap.less" />
+    <None Include="Content\less\breadcrumbs.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\button-groups.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\buttons.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\carousel.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\close.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\code.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\component-animations.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\dropdowns.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\forms.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\grid.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\hero-unit.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\labels-badges.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\layouts.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\mixins.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\modals.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\navbar.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\navs.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\pager.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\pagination.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\popovers.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\progress-bars.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\reset.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\responsive-1200px-min.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\responsive-767px-max.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\responsive-768px-979px.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\responsive-navbar.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\responsive-utilities.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\responsive.less" />
+    <None Include="Content\less\scaffolding.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\sprites.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\tables.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\thumbnails.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\tooltip.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\type.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\utilities.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\variables.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+    <None Include="Content\less\wells.less">
+      <Compile>False</Compile>
+      <Minify>True</Minify>
+    </None>
+  </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
   </ItemGroup>
@@ -262,10 +412,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Features\Home\BootstrapDemo.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Content\bootstrap\united\bootswatch.less" />
-    <None Include="Content\bootstrap\united\variables.less" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Congregation.Application\Congregation.Application.csproj">
@@ -293,7 +439,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>61892</DevelopmentServerPort>
+          <DevelopmentServerPort>49878</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
