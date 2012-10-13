@@ -37,6 +37,9 @@
     <Reference Include="Inflector.Net">
       <HintPath>..\..\lib\Inflector.Net.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
@@ -56,8 +59,12 @@
     <Reference Include="SignalR.Hosting.Common">
       <HintPath>..\packages\SignalR.Hosting.Common.0.5.3\lib\net40\SignalR.Hosting.Common.dll</HintPath>
     </Reference>
-    <Reference Include="StructureMap">
-      <HintPath>..\..\lib\StructureMap.dll</HintPath>
+    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMapAdapter">
+      <HintPath>..\packages\CommonServiceLocator.StructureMapAdapter.1.1.0.3\lib\StructureMapAdapter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
@@ -69,6 +76,9 @@
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Data\IEntityDuplicateChecker.cs" />

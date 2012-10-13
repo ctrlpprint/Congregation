@@ -46,7 +46,7 @@ namespace NHibernate.Mapping.ByCode
 
 			mapper.BeforeMapBag += (modelInspector, propertyPath, map) =>
 			{
-				map.Key(keyMapper => keyMapper.Column(propertyPath.GetContainerEntity(modelInspector).Name + "Fk"));
+				map.Key(keyMapper => keyMapper.Column(propertyPath.GetContainerEntity(modelInspector).Name + "Id"));
 				map.Cascade(Cascade.All);
 			};
 
@@ -64,13 +64,13 @@ namespace NHibernate.Mapping.ByCode
 			};
 
 
-			mapper.Component<Secured<string>>(x => {
+			mapper.Component<RestrictedVisibility<string>>(x => {
 				x.Property(c => c.Value);
 				x.Property(c => c.Visibility);
 				x.Parent(c => c.Owner);
 			});
 
-			mapper.Component<Secured<bool>>(x => {
+			mapper.Component<RestrictedVisibility<bool>>(x => {
 				x.Property(c => c.Value);
 				x.Property(c => c.Visibility);
 				x.Parent(c => c.Owner);

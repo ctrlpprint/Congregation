@@ -42,7 +42,7 @@ namespace Congregation.Application.Data.NHibernate
 			configuration
 				.Proxy(p => p.ProxyFactoryFactory<DefaultProxyFactoryFactory>())
 				.DataBaseIntegration(db => {
-					db.ConnectionStringName = "LocalSqlServer";
+					db.ConnectionStringName = "DefaultConnection";
 					db.Dialect<MsSql2008Dialect>();
 				})
 				.AddAssembly(typeof(Entity).Assembly)

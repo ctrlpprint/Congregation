@@ -1,11 +1,16 @@
-﻿using System.Web;
+﻿using System;
+using System.IO;
+using System.Web;
 using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
+using Congregation.Application.Data.NHibernate;
 using Congregation.Application.Infrastructure;
 using Congregation.Web.Mvc.Binders;
 using Congregation.Web.Mvc.Config;
+using Congregation.Web.Mvc.Modules;
+using NHibernate;
 
 namespace Congregation.Web
 {
@@ -14,6 +19,18 @@ namespace Congregation.Web
 
 	public class MvcApplication : HttpApplication
 	{
+		//public static ISessionFactory SessionFactory = CreateSessionFactory();
+
+		//protected static ISessionFactory CreateSessionFactory() {
+		//    return NHibernateInitializer.Initialize().BuildSessionFactory();
+		//}
+		public static IHttpModule Module = new SessionPerRequestModule();
+
+		public override void Init() {
+			base.Init();
+			Module.Init(this);
+		}
+
 		protected void Application_Start() {
 			AreaRegistration.RegisterAllAreas();
 

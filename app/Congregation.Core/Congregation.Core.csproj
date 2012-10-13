@@ -41,6 +41,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\Check.cs" />
+    <Compile Include="Common\Extensions\EnumerableExtensions.cs" />
+    <Compile Include="Common\Extensions\ObjectExtensions.cs" />
+    <Compile Include="Common\Extensions\StringExtensions.cs" />
     <Compile Include="Models\DomainSignatureAttribute.cs" />
     <Compile Include="Models\Entity.cs" />
     <Compile Include="Models\ComparableObject.cs" />
@@ -49,7 +52,9 @@
     <Compile Include="Models\Families\Family.cs" />
     <Compile Include="Models\IComponent.cs" />
     <Compile Include="Models\IEntity.cs" />
-    <Compile Include="Models\Privacy\Secured.cs" />
+    <Compile Include="Models\Privacy\RestrictedCommunication.cs" />
+    <Compile Include="Models\Privacy\RestrictedVisibility.cs" />
+    <Compile Include="Models\Privacy\Usability.cs" />
     <Compile Include="Models\Privacy\Visibility.cs" />
     <Compile Include="Models\ValueObject.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

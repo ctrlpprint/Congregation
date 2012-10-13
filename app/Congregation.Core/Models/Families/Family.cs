@@ -8,6 +8,7 @@ namespace Congregation.Core.Models.Families
 	{
 		public virtual int Id { get; set; }
 		public virtual string FamilyName { get; set; }
+
 		public virtual IList<Contact> Contacts { get; set; }
 		public virtual string Children { get; set; }
 		public virtual Address Address { get; set; }
@@ -20,7 +21,7 @@ namespace Congregation.Core.Models.Families
 		}
 
 		public virtual bool HasAddress() {
-			return Address != null && !string.IsNullOrEmpty(Address.Description);
+			return Address != null && !string.IsNullOrEmpty(Address.ToString());
 		}
 
 		public virtual string Names() {

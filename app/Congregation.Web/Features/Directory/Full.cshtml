@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Congregation.Core.Models.Families.Family>
+@{
+	ViewBag.Title = "Directory";
+}
+
+<h2>The Directory</h2>
+<div class="row show-grid">
+	@foreach (var family in Model) {
+	 
+		<div class="span9 family" style="margin-bottom: 10px; border-top: 1px solid #DDD;">
+			<div class="row">
+				<div class="span8">
+					<div class="row">
+						<div class="span8 name">
+							<h2 style="display: inline">
+								@family.FamilyName<small style="font-size: inherit">,
+									@family.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
+																	</small>
+
+									<small>@family.Children</small>
+							</h2>
+						</div>
+					</div>
+					<div class="row" style="margin-bottom: 6px;">
+						<div class="span6">
+							@if (family.HasAddress()) {
+								<i class="icon-home" style="color:#DDD" ></i> 
+								@family.Address.ToString()
+								if (family.Address.ToString().IsNotEmpty()) {
+									<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(family.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
+								}
+							}
+						</div>
+						<div class="span2">
+							<i class="icon-phone" style="color:#DDD;"></i> @family.Phone
+						</div>
+					</div>
+					@foreach (var contact in family.Contacts) {
+						<div class="row">
+							<div class="span2 name">
+								<i class="icon-user" style="color:#DDD" ></i> 					
+								<b>@contact.FirstName</b>
+							</div>
+							<div class="span4 email">
+								<a href="mailto:@contact.Email">@contact.Email</a>
+							</div>
+							<div class="span2 phone">
+								<i class="icon-phone-sign" style="color:#DDD;"></i> @contact.Mobile
+							</div>
+						</div>
+					}
+				</div>
+				<div class="span1" style="padding:2px 0;">
+					@foreach (var contact in family.Contacts) {
+						<div class="row" style="text-align: right" >
+							@if (@contact.FacebookId.Value.Length > 0) {
+								<a href="@string.Format("http://www.facebook.com/{0}", contact.FacebookId)" target="_blank" >
+									<img src="@string.Format("http://graph.facebook.com/{0}/picture?type=small", contact.FacebookId)"/>
+								</a>
+							}
+						</div>
+					}
+				</div>
+			</div>
+		</div>
+	}
+</div>

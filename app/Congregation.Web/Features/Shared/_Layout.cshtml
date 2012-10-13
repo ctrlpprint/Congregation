@@ -11,12 +11,39 @@
 	@Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="preview " data-spy="scroll" data-target=".subnav" data-offset="80">
-    @RenderBody()
+<!-- Navbar
+================================================== -->
+<div class="navbar navbar-fixed-top">
+	<div class="navbar-inner">
+		<div class="container">
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse"><span
+				class="icon-bar"></span><span class="icon-bar"></span><span class="icon-bar"></span>
+			</a><a class="brand" href="../">Bootswatch</a>
+			<div class="nav-collapse collapse" id="main-menu">
+				<ul class="nav">
+					<li><a href="#">Home</a></li>					
+					<li><a href="#">and</a></li>					
+					<li><a href="#">Away</a></li>					
+				</ul>
+			</div>
+		</div>
+	</div>
+</div>
+<div class="main container box-shadow ">
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/jqueryui")
-    @Scripts.Render("~/bundles/jqueryval")
-	@Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+	@RenderBody()
+	<br/>
+	<!-- Footer ================================================== -->
+	<footer class="footer">
+		<p class="pull-right"><a href="#">Back to top</a></p>
+	</footer>
+</div>
+<!-- /container -->
+
+@Scripts.Render("~/bundles/jquery")
+@Scripts.Render("~/bundles/jqueryui")
+@Scripts.Render("~/bundles/jqueryval")
+@Scripts.Render("~/bundles/bootstrap")
+@RenderSection("scripts", required: false)
 </body>
 </html>

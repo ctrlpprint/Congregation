@@ -3,30 +3,34 @@ using System.Linq;
 
 namespace Congregation.Core.Models.Privacy
 {
-	public class Secured<T> : IComponent
+	public class RestrictedVisibility<T> : IComponent
 	{
 		public virtual T Value { get; set; }
 		public virtual Visibility Visibility { get; set; }
 
 		// Can a component include a reference to its parent?
 		public virtual object Owner { get; set; }
-		
-		public static implicit operator T (Secured<T> secured) {
+
+		public override string ToString() {
+			return Value.ToString();
+		}
+
+		public static implicit operator T (RestrictedVisibility<T> restrictedVisibility) {
 			// Show if user has rights
-			if (secured.Visibility == Visibility.Congregation)
-				return secured.Value;
+			if (restrictedVisibility.Visibility == Visibility.Congregation)
+				return restrictedVisibility.Value;
 
 			var currentUser = System.Threading.Thread.CurrentPrincipal;
 			if (currentUser.IsInRole("Admin"))
-				return secured.Value;
-			if (currentUser.IsInRole("Staff") && secured.Visibility == Visibility.Staff)
-				return secured.Value;
+				return restrictedVisibility.Value;
+			if (currentUser.IsInRole("Staff") && restrictedVisibility.Visibility == Visibility.Staff)
+				return restrictedVisibility.Value;
 
 			// if currentUser is in this aggregate, return value
-			var family = secured.PartOfFamily();
+			var family = restrictedVisibility.PartOfFamily();
 			if (family == null) return default(T);
 			// Sub in below whatever the login name is
-			return family.Contacts.Any(c => c.FacebookId == currentUser.Identity.Name) ? secured.Value : default(T);
+			return family.Contacts.Any(c => c.FacebookId == currentUser.Identity.Name) ? restrictedVisibility.Value : default(T);
 		}
 
 		private Family PartOfFamily() {

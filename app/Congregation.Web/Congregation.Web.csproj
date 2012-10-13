@@ -39,6 +39,9 @@
       <HintPath>..\packages\Iesi.Collections.3.2.0.4000\lib\Net35\Iesi.Collections.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Microsoft.Practices.ServiceLocation">
+      <HintPath>..\packages\CommonServiceLocator.1.0\lib\NET35\Microsoft.Practices.ServiceLocation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.4.5.9\lib\net40\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -53,6 +56,13 @@
     </Reference>
     <Reference Include="SignalR.Hosting.Common">
       <HintPath>..\packages\SignalR.Hosting.Common.0.5.3\lib\net40\SignalR.Hosting.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMap, Version=2.6.4.0, Culture=neutral, PublicKeyToken=e60ad81abae3c223, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\structuremap.2.6.4.1\lib\net40\StructureMap.dll</HintPath>
+    </Reference>
+    <Reference Include="StructureMapAdapter">
+      <HintPath>..\packages\CommonServiceLocator.StructureMapAdapter.1.1.0.3\lib\StructureMapAdapter.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -118,6 +128,9 @@
       <Private>True</Private>
       <HintPath>..\packages\Microsoft.AspNet.WebPages.2.0.20710.0\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
     </Reference>
+    <Reference Include="WebActivator">
+      <HintPath>..\packages\WebActivator.1.4.4\lib\net40\WebActivator.dll</HintPath>
+    </Reference>
     <Reference Include="WebGrease">
       <Private>True</Private>
       <HintPath>..\packages\WebGrease.1.1.0\lib\WebGrease.dll</HintPath>
@@ -128,6 +141,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\CommonController.cs" />
+    <Compile Include="Features\Directory\DirectoryController.cs" />
     <Compile Include="Mvc\Config\BundleConfig.cs" />
     <Compile Include="Mvc\Config\FeatureBasedViewEngine.cs" />
     <Compile Include="Mvc\Config\FilterConfig.cs" />
@@ -147,6 +162,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.site.css" />
+    <Content Include="Content\font\fontawesome-webfont.svg" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
     <Content Include="Content\less\bootstrap.css">
@@ -154,6 +170,12 @@
     </Content>
     <Content Include="Content\less\bootstrap.min.css">
       <DependentUpon>bootstrap.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\font-awesome.css">
+      <DependentUpon>font-awesome.less</DependentUpon>
+    </Content>
+    <Content Include="Content\less\font-awesome.min.css">
+      <DependentUpon>font-awesome.less</DependentUpon>
     </Content>
     <Content Include="Content\less\responsive.css">
       <DependentUpon>responsive.less</DependentUpon>
@@ -250,6 +272,9 @@
     <Content Include="Features\Shared\_Layout.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Content\font\fontawesome-webfont.eot" />
+    <None Include="Content\font\fontawesome-webfont.ttf" />
+    <None Include="Content\font\fontawesome-webfont.woff" />
     <None Include="Content\less\accordion.less">
       <Compile>False</Compile>
       <Minify>True</Minify>
@@ -291,6 +316,8 @@
       <Compile>False</Compile>
       <Minify>True</Minify>
     </None>
+    <None Include="Content\less\font-awesome-ie7.less" />
+    <None Include="Content\less\font-awesome.less" />
     <None Include="Content\less\forms.less">
       <Compile>False</Compile>
       <Minify>True</Minify>
@@ -404,6 +431,7 @@
       <Compile>False</Compile>
       <Minify>True</Minify>
     </None>
+    <Content Include="Features\Directory\Full.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
