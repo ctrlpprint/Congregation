@@ -264,10 +264,17 @@ mxn.register('leaflet', {
 
 		toProprietary: function () {
 			var me = this;
-			var thisIcon = L.Icon;
+			var thisIcon = L.Icon.Default;
 			if (me.iconUrl) {
-				thisIcon = thisIcon.extend({
-					iconUrl: me.iconUrl
+				thisIcon = L.Icon.extend({
+
+					options: {
+						popupAnchor: new L.Point(me.iconSize[0]/2, 5)
+					},
+
+					_getIconUrl: function (name) {
+						return me.iconUrl;
+					}
 				});
 			}
 			if (me.iconSize) {
