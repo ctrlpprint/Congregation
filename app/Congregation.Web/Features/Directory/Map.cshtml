@@ -12,11 +12,11 @@
 	@foreach(var family in Model.Where(f => f.HasLocation())) {
 		<li data-mapping='{"id":"@family.Id","latlng":{"lat":@family.Address.Lat,"lng":@family.Address.Lng},"tags":""}'>
 			<div class="info-box">
-				<h3>@string.Join(" and ", family.Contacts.Select(c => c.FirstName)) @family.FamilyName</h3>
+				<h3 style="margin: 0;">@string.Join(" and ", family.Contacts.Select(c => c.FirstName)) @family.FamilyName</h3>
 				@foreach(var contact in family.Contacts.Where(c => c.FacebookId.Value.Length > 0)) {
-					<img src="http://graph.facebook.com/@contact.FacebookId/picture" style="float: left;" />
+					<img src="http://graph.facebook.com/@contact.FacebookId/picture" style="float: left; margin-right:2px" />
 				}
-				<p>@family.Address.ToString()</p>
+				<p>@family.Address.ToString() (<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(family.Address.ToString()))">Google Map</a>) </p>
 
 				
 			</div>		</li>
