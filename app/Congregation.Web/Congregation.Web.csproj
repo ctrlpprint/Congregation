@@ -256,6 +256,11 @@
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
     <Content Include="Scripts\less.min.js" />
+    <Content Include="Scripts\mapstraction\mxn.%28provider%29.core.js" />
+    <Content Include="Scripts\mapstraction\mxn.%28provider%29.geocoder.js" />
+    <Content Include="Scripts\mapstraction\mxn.js" />
+    <Content Include="Scripts\mapstraction\mxn.leaflet.core.js" />
+    <Content Include="Scripts\mapstraction\mxn.mapquest.geocoder.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\prefixfree.js" />
     <Content Include="Scripts\_references.js" />
@@ -432,6 +437,7 @@
       <Minify>True</Minify>
     </None>
     <Content Include="Features\Directory\Full.cshtml" />
+    <Content Include="Features\Directory\Map.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

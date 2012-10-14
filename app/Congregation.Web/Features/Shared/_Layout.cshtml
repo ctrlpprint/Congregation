@@ -6,9 +6,12 @@
     <title>@ViewBag.Title</title>
 	@Styles.Render("~/Content/bootstrap")
 	@Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/prefixfree")
+	@RenderSection("Styles", false)
 
+	@Scripts.Render("~/bundles/prefixfree")
 	@Scripts.Render("~/bundles/modernizr")
+	@RenderSection("Script", false)
+
 </head>
 <body class="preview " data-spy="scroll" data-target=".subnav" data-offset="80">
 <!-- Navbar
@@ -44,6 +47,6 @@
 @Scripts.Render("~/bundles/jqueryui")
 @Scripts.Render("~/bundles/jqueryval")
 @Scripts.Render("~/bundles/bootstrap")
-@RenderSection("scripts", required: false)
+@RenderSection("LateScript", required: false)
 </body>
 </html>

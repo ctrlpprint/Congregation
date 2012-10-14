@@ -29,5 +29,17 @@ namespace Congregation.Web.Features.Directory
             return View(families);
         }
 
+		public ActionResult Map() {
+			var families = repository.Session.QueryOver<Family>()
+				.Fetch(f => f.Contacts).Eager
+				.Fetch(f => f.Address).Eager
+				.TransformUsing(Transformers.DistinctRootEntity)
+				.OrderBy(f => f.FamilyName).Asc
+				.List();
+
+
+			return View(families);
+		}
+
     }
 }
