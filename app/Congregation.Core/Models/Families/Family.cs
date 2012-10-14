@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using Congregation.Core.Models.Privacy;
 
@@ -22,6 +23,10 @@ namespace Congregation.Core.Models.Families
 
 		public virtual bool HasAddress() {
 			return Address != null && !string.IsNullOrEmpty(Address.ToString());
+		}
+
+		public virtual bool HasLocation() {
+			return Address != null && Address.Lat.IsNotEmpty() && Address.Lng.IsNotEmpty();
 		}
 
 		public virtual string Names() {

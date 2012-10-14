@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="Features\CommonController.cs" />
     <Compile Include="Features\Directory\DirectoryController.cs" />
+    <Compile Include="Mvc\Attributes\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Mvc\Config\BundleConfig.cs" />
     <Compile Include="Mvc\Config\FeatureBasedViewEngine.cs" />
     <Compile Include="Mvc\Config\FilterConfig.cs" />
@@ -163,8 +164,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.site.css" />
     <Content Include="Content\font\fontawesome-webfont.svg" />
+    <Content Include="Content\images\1334654919_agt_family.png" />
+    <Content Include="Content\images\1334655465_agt_family.png" />
     <Content Include="Content\images\glyphicons-halflings-white.png" />
     <Content Include="Content\images\glyphicons-halflings.png" />
+    <Content Include="Content\images\Map-Marker-Pink-48.png" />
+    <Content Include="Content\Leaflet.css" />
     <Content Include="Content\less\bootstrap.css">
       <DependentUpon>bootstrap.less</DependentUpon>
     </Content>
@@ -255,12 +260,8 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\knockout-2.1.0.debug.js" />
     <Content Include="Scripts\knockout-2.1.0.js" />
+    <Content Include="Scripts\leaflet.js" />
     <Content Include="Scripts\less.min.js" />
-    <Content Include="Scripts\mapstraction\mxn.%28provider%29.core.js" />
-    <Content Include="Scripts\mapstraction\mxn.%28provider%29.geocoder.js" />
-    <Content Include="Scripts\mapstraction\mxn.js" />
-    <Content Include="Scripts\mapstraction\mxn.leaflet.core.js" />
-    <Content Include="Scripts\mapstraction\mxn.mapquest.geocoder.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
     <Content Include="Scripts\prefixfree.js" />
     <Content Include="Scripts\_references.js" />
