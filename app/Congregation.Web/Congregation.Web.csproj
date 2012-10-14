@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="Features\CommonController.cs" />
     <Compile Include="Features\Directory\DirectoryController.cs" />
+    <Compile Include="Features\Families\FamiliesController.cs" />
     <Compile Include="Mvc\Attributes\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Mvc\Config\BundleConfig.cs" />
     <Compile Include="Mvc\Config\FeatureBasedViewEngine.cs" />
@@ -439,6 +440,7 @@
     </None>
     <Content Include="Features\Directory\Full.cshtml" />
     <Content Include="Features\Directory\Map.cshtml" />
+    <Content Include="Features\Families\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

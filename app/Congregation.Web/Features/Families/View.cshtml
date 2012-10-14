@@ -1,0 +1,125 @@
+﻿@model Congregation.Core.Models.Families.Family
+
+@{
+	ViewBag.Title = "@Model.FirstName";
+}
+
+
+<div class="span9 family" style="margin-bottom: 10px; border-top: 1px solid #DDD;">
+	<div class="row">
+		<div class="span8">
+			<div class="row">
+				<div class="span8 name">
+					<h2 style="display: inline">
+						@Model.FamilyName<small style="font-size: inherit">,
+							@Model.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
+															</small>
+
+							<small>@Model.Children</small>
+					</h2>
+				</div>
+			</div>
+			<div class="row">
+			@foreach (var contact in @Model.Contacts) {
+				<div class="span2" >
+					<a href="@string.Format("http://www.facebook.com/{0}", contact.FacebookId)" target="_blank" >
+						<img src="@string.Format("http://graph.facebook.com/{0}/picture?type=large", contact.FacebookId)"/>
+					</a>
+				</div>
+				<div class="span2"><div style="padding:0 5px;">
+					<div class="row">
+						<i class="icon-user" style="color:#DDD" ></i> 					
+						<b>@contact.FirstName</b>						
+					</div>
+					<div class="row">
+						<i class="icon-envelope-alt" style="color:#DDD" ></i> 					
+						<a href="mailto:@contact.Email">@contact.Email</a>
+					</div>
+					<div class="row">
+						<i class="icon-phone-sign" style="color:#DDD;"></i> @contact.Mobile
+					</div>
+				</div></div>
+			}
+			</div>
+			<div class="row" style="margin: 6px 0;">
+				<div class="span6">
+					@if (@Model.HasAddress()) {
+						<span data-mapping='{"id":"@Model.Id","latlng":{"lat":@Model.Address.Lat,"lng":@Model.Address.Lng},"tags":""}'></span>
+						<i class="icon-home" style="color:#DDD" ></i> 
+						@Model.Address.ToString()
+						if (@Model.Address.ToString().IsNotEmpty()) {
+							<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(@Model.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
+						}
+					}
+				</div>
+				<div class="span2">
+					<i class="icon-phone" style="color:#DDD;"></i> @Model.Phone
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<div id="map_canvas" class="map rounded"></div>
+
+@section Styles {
+	<style type="text/css">
+		.map { width: 100%; height:400px; }
+	</style>
+}
+
+@section Script {
+	<link href="http://cdn.leafletjs.com/leaflet-0.4/leaflet.css" media="all" rel="stylesheet" type="text/css" />
+	<!--[if lte IE 8]><link rel="stylesheet" href="http://leaflet.cloudmade.com/dist/leaflet.ie.css" /><![endif]-->
+	<script src="http://leaflet.cloudmade.com/dist/leaflet.js" type="text/javascript"> </script>
+}
+
+@section LateScript {
+
+	<script type="text/javascript">
+
+		$(function () {
+
+			$("#map_data").hide();
+
+			var cmAttr = 'Map data &copy; 2012 OpenStreetMap contributors, Imagery &copy; 2012 CloudMade',
+				cmUrl = 'http://{s}.tile.cloudmade.com/@System.Configuration.ConfigurationManager.AppSettings["CloudMadeApiKey"]/{styleId}/256/{z}/{x}/{y}.png';
+
+			var city = L.tileLayer(cmUrl, { styleId: 1714, attribution: cmAttr });
+			var yellow = L.tileLayer(cmUrl, { styleId: 1155, attribution: cmAttr });
+
+
+			// Houses
+			var data;
+			var houses = new L.LayerGroup();
+			$("[data-mapping]").each(function (i, el) {
+				data = $(el).data('mapping');
+				var description = $(el).find('.info-box').html();
+				L.marker([data.latlng.lat, data.latlng.lng])
+					.bindPopup(description)
+					.addTo(houses);
+			});
+
+
+			var map = L.map('map_canvas', {
+				center: [data.latlng.lat, data.latlng.lng],
+				zoom: 15,
+				layers: [city, houses]
+			});
+
+			var baseLayers = {
+				"City": city,
+				"A-Z": yellow
+			};
+
+			var overlays = {
+				"Houses": houses
+			};
+
+			L.control.scale().addTo(map);
+			L.control.layers(baseLayers, overlays).addTo(map);
+
+		});
+
+	</script>
+}
