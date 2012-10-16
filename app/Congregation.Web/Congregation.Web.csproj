@@ -143,6 +143,7 @@
   <ItemGroup>
     <Compile Include="Features\CommonController.cs" />
     <Compile Include="Features\Directory\DirectoryController.cs" />
+    <Compile Include="Features\Directory\DirectorySearchViewModel.cs" />
     <Compile Include="Features\Families\FamiliesController.cs" />
     <Compile Include="Mvc\Attributes\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Mvc\Config\BundleConfig.cs" />
@@ -159,6 +160,7 @@
     <Compile Include="Mvc\Binders\EntityCollectionValueBinder.cs" />
     <Compile Include="Mvc\Binders\EntityRetriever.cs" />
     <Compile Include="Mvc\Binders\EntityValueBinder.cs" />
+    <Compile Include="Mvc\Helpers\HtmlHelperExtensions.cs" />
     <Compile Include="Mvc\Modules\SessionPerRequestModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -441,6 +443,7 @@
     <Content Include="Features\Directory\Full.cshtml" />
     <Content Include="Features\Directory\Map.cshtml" />
     <Content Include="Features\Families\View.cshtml" />
+    <Content Include="Features\Directory\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

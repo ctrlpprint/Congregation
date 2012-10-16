@@ -7,18 +7,20 @@
 <div class="row show-grid">
 	@foreach (var family in Model) {
 	 
-		<div class="span9 family" style="margin-bottom: 10px; border-top: 1px solid #DDD;">
+		<div class="span9 family" style="padding-bottom: 10px; border-top: 1px solid #DDD;">
 			<div class="row">
 				<div class="span8">
 					<div class="row">
-						<div class="span8 name">
+						<div class="span7 name">
 							<h2 style="display: inline">
 								@family.FamilyName<small style="font-size: inherit">,
-									@family.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
-																	</small>
+												  	@family.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
+												  </small>
 
-									<small>@family.Children</small>
+								<small>@family.Children</small>
 							</h2>
+						</div>
+						<div class="span1">
 						</div>
 					</div>
 					<div class="row" style="margin-bottom: 6px;">
@@ -26,10 +28,10 @@
 							@if (family.HasAddress()) {
 								<i class="icon-home" style="color:#DDD" ></i> 
 								@family.Address.ToString()
-								if (family.Address.ToString().IsNotEmpty()) {
+		   if (family.Address.ToString().IsNotEmpty()) {
 									<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(family.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
-								}
-							}
+		   }
+	   }
 						</div>
 						<div class="span2">
 							<i class="icon-phone" style="color:#DDD;"></i> @family.Phone
@@ -49,19 +51,32 @@
 							</div>
 						</div>
 					}
-				</div>
-				<div class="span1" style="padding:2px 0;">
+					</div>
+				<div class="span1" style="padding:8px 0; position:relative;">
+						<a class="view-link" 
+							href="@Url.Action("View", "Families", new { id = family.Id })">
+							<i class="icon-chevron-right"></i>
+						</a>
 					@foreach (var contact in family.Contacts) {
-						<div class="row" style="text-align: right" >
+						<div style="text-align: right; clear:right;" >
 							@if (@contact.FacebookId.Value.Length > 0) {
-								<a href="@string.Format("http://www.facebook.com/{0}", contact.FacebookId)" target="_blank" >
-									<img src="@string.Format("http://graph.facebook.com/{0}/picture?type=small", contact.FacebookId)"/>
-								</a>
+								<img src="@string.Format("http://graph.facebook.com/{0}/picture?type=small", contact.FacebookId)"/>
 							}
 						</div>
 					}
 				</div>
 			</div>
 		</div>
-	}
+ }
 </div>
+
+@section Styles {
+	<style type="text/css">
+		.family .view-link { display: none;}
+		.family:hover { background-color: rgb(250,250,250);}
+		.family:hover .view-link { display: block; color:#999; font-size: 64px;position: absolute;
+			top: 30px;right: 60px;z-index: 200;}
+		.family .view-link:hover { color: blue;text-decoration: none;}
+		
+	</style>
+}

@@ -1,15 +1,15 @@
 ﻿@model Congregation.Core.Models.Families.Family
 
 @{
-	ViewBag.Title = "@Model.FirstName";
+	ViewBag.Title = Model.FamilyName;
 }
 
 
-<div class="span9 family" style="margin-bottom: 10px; ">
+<div class="span10 family" style="margin-bottom: 10px; ">
 	<div class="row">
-		<div class="span8">
+		<div class="span10">
 			<div class="row">
-				<div class="span8 name">
+				<div class="span10 name">
 					<h2 style="display: inline">
 						@Model.FamilyName<small style="font-size: inherit">,
 							@Model.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
@@ -19,53 +19,58 @@
 					</h2>
 				</div>
 			</div>
+			<hr/>
 			<div class="row">
-			@foreach (var contact in @Model.Contacts) {
-				<div class="span2" style="position:relative">
-					<div class="vignette">
-@*						<a href="@string.Format("http://www.facebook.com/{0}", contact.FacebookId)" target="_blank" >*@
+				@foreach (var contact in @Model.Contacts) {
+					<div class="span2" style="position:relative">
+						<div class="vignette">
+							@*						<a href="@string.Format("http://www.facebook.com/{0}", contact.FacebookId)" target="_blank" >*@
 							<img src="@string.Format("http://graph.facebook.com/{0}/picture?type=large", contact.FacebookId)"/>
-					@*	</a>*@
+							@*	</a>*@
+						</div>
 					</div>
+					<div class="span3"><div style="padding:0 5px;">
+									   	<div class="row">
+											<i class="icon-user" style="color:#DDD" ></i> 					
+											<b>@contact.FirstName</b>						
+										</div>
+									   	<div class="row">
+											<i class="icon-envelope-alt" style="color:#DDD" ></i> 					
+											<a href="mailto:@contact.Email">@contact.Email</a>
+										</div>
+									   	<div class="row">
+											<i class="icon-phone-sign" style="color:#DDD;"></i> @contact.Mobile
+										</div>
+									   </div></div>
+				}
+			</div>
+			<hr/>
+			<h4>Home</h4>
+			<div class="row span10" style="margin: 6px 0;">
+			@if (@Model.HasAddress()) {
+				<div data-mapping='{"id":"@Model.Id","latlng":{"lat":@Model.Address.Lat,"lng":@Model.Address.Lng},"tags":""}'>
+				<i class="icon-home" style="color:#DDD" ></i> 
+				<span class="info-box">
+					@Model.Address.ToString()
+				</span>
+				@if (@Model.Address.ToString().IsNotEmpty()) {
+					<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(@Model.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
+				}
 				</div>
-				<div class="span2"><div style="padding:0 5px;">
-					<div class="row">
-						<i class="icon-user" style="color:#DDD" ></i> 					
-						<b>@contact.FirstName</b>						
-					</div>
-					<div class="row">
-						<i class="icon-envelope-alt" style="color:#DDD" ></i> 					
-						<a href="mailto:@contact.Email">@contact.Email</a>
-					</div>
-					<div class="row">
-						<i class="icon-phone-sign" style="color:#DDD;"></i> @contact.Mobile
-					</div>
-				</div></div>
 			}
 			</div>
-			<div class="row" style="margin: 6px 0;">
-				<div class="span6">
-					@if (@Model.HasAddress()) {
-						<div data-mapping='{"id":"@Model.Id","latlng":{"lat":@Model.Address.Lat,"lng":@Model.Address.Lng},"tags":""}'>
-						<i class="icon-home" style="color:#DDD" ></i> 
-						<span class="info-box">
-							@Model.Address.ToString()
-						</span>
-						@if (@Model.Address.ToString().IsNotEmpty()) {
-							<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(@Model.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
-						}
-						</div>
-					}
-				</div>
-				<div class="span2">
-					<i class="icon-phone" style="color:#DDD;"></i> @Model.Phone
-				</div>
+			<div class="row span10"  style="margin: 6px 0;">
+				<i class="icon-phone" style="color:#DDD;"></i> @Model.Phone
 			</div>
+			<hr/>
 		</div>
 	</div>
 </div>
 
-<div id="map_canvas" class="map rounded"></div>
+
+<div class="span10 clearfix" style="margin-bottom: 10px; border:1px solid #CCC; ">
+	<div id="map_canvas" class="map"></div>
+</div>
 
 @section Styles {
 	<style type="text/css">

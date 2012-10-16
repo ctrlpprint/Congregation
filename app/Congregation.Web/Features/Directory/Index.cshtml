@@ -1,0 +1,40 @@
+﻿@model Congregation.Web.Features.Directory.DirectorySearchViewModel
+
+@{
+	ViewBag.Title = "Find a member";
+}
+
+<label>Who are you looking for? </label>
+<input id="directorySearch" type="text" class="span3" style="margin: 0 auto;" data-provide="typeahead" 
+	placeholder="Type a name">
+
+
+@section LateScript {
+	<script type="text/javascript">
+		$(function () {
+
+			var members = @Html.ToJson(Model.Members);
+			
+			// Build list for autocomplete
+			var list = [];
+			for(var i in members) {
+				list[+i] = members[i].Name;
+			}
+			
+			// Redirect when found
+			@* Hack - use a placeholder for the id the url, and replace when we have the id. *@
+			var url = "@Url.Action("View", "Families", new { Id = -1})";
+			$('#directorySearch').typeahead({
+				updater: function (item) {
+					$.each(members, function(i, member) {
+						if (member.Name == item) {
+							window.location = url.replace("-1", member.FamilyId);
+						}
+					});
+				},
+				items: 4,
+				source: list
+			});
+		});
+	</script>
+}

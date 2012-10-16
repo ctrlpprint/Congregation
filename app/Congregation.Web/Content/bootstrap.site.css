@@ -13,7 +13,19 @@ body {
 
 /* Responsive Docs
 -------------------------------------------------- */
-@media (min-width: 980px) {
+@media screen and (min-width: 1200px) {
+	.navbar-fixed-top .container {
+		width:960px;
+		margin:0 auto;
+		padding: 0 10px;
+	}
+
+	.main.container{
+		min-height: 100%;
+	}
+
+}
+@media screen and (min-width: 980px) {
 	/* navbar not a toolbar 
 	.navbar-top .navbar-inner {
 		background-image: none;
@@ -46,23 +58,32 @@ body {
 				transparent);
 	}
 
+	body {
+		height: 100%;
+	}
+
 	.box-shadow {  /* CSS3: http://owltastic.com/1409/12/shadows-and-css3/ */
 		box-shadow: -8px 0 6px -6px rgba(0,0,0,.5);  /* x-offset y-offset blur spread color */
 	}
 
 	.rounded {
 		border-radius: 4px;
-		-moz-border-radius: 4px;
-		-webkit-border-radius: 4px;
 		padding: 5px;
 	}
 
 	.main.container{
-		width:960px;
-		margin:0 auto;
 		background-color: white;
 		padding: 20px;
+		display: table;
+		height: 100%; /* min-height doesn't work, even with height set on parents */
 	}
+	
+	.container {
+		width:960px;
+		margin:0 auto;
+		padding: 0 10px;
+	}
+	
 }
 
 @media screen and (min-width: 600px) { 
