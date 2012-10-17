@@ -145,6 +145,8 @@
     <Compile Include="Features\Directory\DirectoryController.cs" />
     <Compile Include="Features\Directory\DirectorySearchViewModel.cs" />
     <Compile Include="Features\Families\FamiliesController.cs" />
+    <Compile Include="Features\Families\ViewFamilyViewModel.cs" />
+    <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Mvc\Attributes\AllowCrossSiteJsonAttribute.cs" />
     <Compile Include="Mvc\Config\BundleConfig.cs" />
     <Compile Include="Mvc\Config\FeatureBasedViewEngine.cs" />

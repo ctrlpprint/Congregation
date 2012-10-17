@@ -1,27 +1,27 @@
-﻿@model Congregation.Core.Models.Families.Family
+﻿@model Congregation.Web.Features.Families.ViewFamilyViewModel
 
 @{
-	ViewBag.Title = Model.FamilyName;
+	ViewBag.Title = Model.Family.FamilyName;
 }
 
-
+<!--- Family Details -->
 <div class="span10 family" style="margin-bottom: 10px; ">
 	<div class="row">
 		<div class="span10">
 			<div class="row">
 				<div class="span10 name">
 					<h2 style="display: inline">
-						@Model.FamilyName<small style="font-size: inherit">,
-							@Model.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
+						@Model.Family.FamilyName<small style="font-size: inherit">,
+							@Model.Family.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")
 															</small>
 
-							<small>@Model.Children</small>
+							<small>@Model.Family.Children</small>
 					</h2>
 				</div>
 			</div>
 			<hr/>
 			<div class="row">
-				@foreach (var contact in @Model.Contacts) {
+				@foreach (var contact in @Model.Family.Contacts) {
 					<div class="span2" style="position:relative">
 						<div class="vignette">
 							@*						<a href="@string.Format("http://www.facebook.com/{0}", contact.FacebookId)" target="_blank" >*@
@@ -47,29 +47,51 @@
 			<hr/>
 			<h4>Home</h4>
 			<div class="row span10" style="margin: 6px 0;">
-			@if (@Model.HasAddress()) {
-				<div data-mapping='{"id":"@Model.Id","latlng":{"lat":@Model.Address.Lat,"lng":@Model.Address.Lng},"tags":""}'>
+			@if (@Model.Family.HasAddress()) {
+				<div data-mapping='{"id":"@Model.Family.Id","latlng":{"lat":@Model.Family.Address.Lat,"lng":@Model.Family.Address.Lng},"tags":""}'>
 				<i class="icon-home" style="color:#DDD" ></i> 
 				<span class="info-box">
-					@Model.Address.ToString()
+					@Model.Family.Address.ToString()
 				</span>
-				@if (@Model.Address.ToString().IsNotEmpty()) {
-					<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(@Model.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
+				@if (@Model.Family.Address.ToString().IsNotEmpty()) {
+					<a href="@string.Format("http://maps.google.com/maps?q={0}", HttpUtility.UrlEncode(@Model.Family.Address.ToString()))" style="color:#DDD"><i class="icon-globe" ></i>Map</a>
 				}
 				</div>
 			}
 			</div>
 			<div class="row span10"  style="margin: 6px 0;">
-				<i class="icon-phone" style="color:#DDD;"></i> @Model.Phone
+				<i class="icon-phone" style="color:#DDD;"></i> @Model.Family.Phone
 			</div>
 			<hr/>
 		</div>
 	</div>
 </div>
 
-
+<!-- Map -->
 <div class="span10 clearfix" style="margin-bottom: 10px; border:1px solid #CCC; ">
 	<div id="map_canvas" class="map"></div>
+</div>
+
+<!-- Neighbours -->
+<div class="span10 neighbours">
+	<table class="table table-striped table-bordered">
+		<thead>
+			<tr>
+				<th>Family</th>
+				<th>Address</th>
+				<th>Distance</th>
+			</tr>
+		</thead>
+		<tbody>
+			@foreach(var neighbour in Model.Neighbours) {
+				<tr data-mapping='{"id":"@neighbour.Family.Id","latlng":{"lat":@neighbour.Family.Address.Lat,"lng":@neighbour.Family.Address.Lng},"tags":""}'>
+					<th class="info-box">@neighbour.Family.FamilyName, @neighbour.Family.Contacts.Select(c => c.FirstName).ToDelimitedList(" & ")</th>
+					<td>@neighbour.Family.Address.ToString()</td>
+					<td>@neighbour.Distance.ToString("N0")</td>
+				</tr>
+			}
+		</tbody>
+	</table>
 </div>
 
 @section Styles {
@@ -101,11 +123,35 @@
 
 			// Houses
 			var data;
-			var houses = new L.LayerGroup();
-			$("[data-mapping]").each(function (i, el) {
+
+			var myIcon = L.icon({
+				iconUrl: '@Url.Content("~/Content/images/Map-Marker-Pink-48.png")',
+				iconSize: [48, 48],
+				iconAnchor: [24, 48],
+				popupAnchor: [0, -40],
+				shadowUrl: 'http://leaflet.cloudmade.com/dist/images/marker-shadow.png',
+				shadowSize: [48, 48],
+				shadowAnchor: [14, 48]
+			});
+
+			var neighbours = new L.LayerGroup();
+			$(".neighbours [data-mapping]").each(function (i, el) {
 				data = $(el).data('mapping');
 				var description = $(el).find('.info-box').html();
 				L.marker([data.latlng.lat, data.latlng.lng])
+					.bindPopup(description)
+					.addTo(neighbours);
+			});
+
+			// Do second so we centre on the house.
+			var houses = new L.LayerGroup();
+			$(".family [data-mapping]").each(function (i, el) {
+				data = $(el).data('mapping');
+				var description = $(el).find('.info-box').html();
+				L.marker([data.latlng.lat, data.latlng.lng],
+					{
+						icon: myIcon
+					})
 					.bindPopup(description)
 					.addTo(houses);
 			});
@@ -114,7 +160,7 @@
 			var map = L.map('map_canvas', {
 				center: [data.latlng.lat, data.latlng.lng],
 				zoom: 15,
-				layers: [city, houses]
+				layers: [city, houses, neighbours]
 			});
 
 			var baseLayers = {
@@ -123,7 +169,8 @@
 			};
 
 			var overlays = {
-				"Houses": houses
+				"Houses": houses,
+				"Neighbours": neighbours
 			};
 
 			L.control.scale().addTo(map);

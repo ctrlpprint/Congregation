@@ -47,6 +47,7 @@ namespace Congregation.Application.Data.NHibernate
 				})
 				.AddAssembly(typeof(Entity).Assembly)
 				.CurrentSessionContext<LazySessionContext>();
+
 			return configuration;
 		}
 
